@@ -74,6 +74,23 @@ export default class Player extends Sprite {
   }
 
   *whenIReceiveGameLoop() {
+    this.stage.vars.health = 3;
+
+       while (true) {
+
+        if (this.touching("DestructiveItems")){
+
+         this.stage.vars.health += -1;
+          if (this.stage.vars.health == 0 ){
+          this.broadcast("dead")
+          }
+        }
+          yield;
+       }
+
+  }
+
+  *whenIReceiveGameLoop() {
     while (true) {
       if (this.keyPressed("any")) {
         if (this.keyPressed("left arrow")) {
